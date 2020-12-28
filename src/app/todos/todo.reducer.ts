@@ -30,7 +30,15 @@ const _todoReducer = createReducer(
         return todo;
       }
     });
-  })
+  }),
+  on(actions.toggleAll, (state) => {
+    return state.map((todo) => {
+      return { ...todo, completado: !todo.completado };
+    });
+  }),
+  on(actions.limpiarCompletados, (state) =>
+    state.filter((todo) => !todo.completado)
+  )
 );
 
 export function todoReducer(state, action) {
